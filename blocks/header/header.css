@@ -30,6 +30,16 @@ header nav[aria-expanded='true'] {
   min-height: 100dvh;
 }
 
+/* hamburger */
+header nav .nav-hamburger {
+  grid-area: hamburger;
+  height: 22px;
+  display: flex;
+  align-items: center;
+}
+header nav a.home-link {
+  color: #0659d4;
+}
 @media (width >= 900px) {
   header .nav-wrapper {
     position: relative;
