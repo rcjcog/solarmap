@@ -10,10 +10,11 @@
 }
 
 .carousel .carousel-slides {
-  display: flex;
+display: flex;
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  overflow: scroll clip;
+  scroll-snap-type: x proximity; 
+  overflow-x: auto;              
+  overflow-y: hidden;
 }
 
 .carousel .carousel-slides::-webkit-scrollbar {

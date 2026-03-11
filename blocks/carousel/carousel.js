@@ -6,7 +6,6 @@ function updateActiveSlide(slide) {
   block.dataset.activeSlide = slideIndex;
 
   const slides = block.querySelectorAll('.carousel-slide');
-
   slides.forEach((aSlide, idx) => {
     aSlide.setAttribute('aria-hidden', idx !== slideIndex);
     aSlide.querySelectorAll('a').forEach((link) => {
@@ -37,6 +36,9 @@ function showSlide(block, slideIndex = 0) {
   if (slideIndex >= slides.length) realSlideIndex = 0;
   const activeSlide = slides[realSlideIndex];
 
+  // update dataset immediately so autoplay stays in sync
+  block.dataset.activeSlide = realSlideIndex;
+
   activeSlide.querySelectorAll('a').forEach((link) => link.removeAttribute('tabindex'));
   block.querySelector('.carousel-slides').scrollTo({
     top: 0,
@@ -47,21 +49,28 @@ function showSlide(block, slideIndex = 0) {
 
 function bindEvents(block) {
   const slideIndicators = block.querySelector('.carousel-slide-indicators');
-  if (!slideIndicators) return;
-
-  slideIndicators.querySelectorAll('button').forEach((button) => {
-    button.addEventListener('click', (e) => {
-      const slideIndicator = e.currentTarget.parentElement;
-      showSlide(block, parseInt(slideIndicator.dataset.targetSlide, 10));
+  if (slideIndicators) {
+    slideIndicators.querySelectorAll('button').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const slideIndicator = e.currentTarget.parentElement;
+        showSlide(block, parseInt(slideIndicator.dataset.targetSlide, 10));
+      });
     });
-  });
+  }
 
-  block.querySelector('.slide-prev').addEventListener('click', () => {
-    showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
-  });
-  block.querySelector('.slide-next').addEventListener('click', () => {
-    showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
-  });
+  const prevBtn = block.querySelector('.slide-prev');
+  const nextBtn = block.querySelector('.slide-next');
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) - 1);
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      showSlide(block, parseInt(block.dataset.activeSlide, 10) + 1);
+    });
+  }
 
   const slideObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -123,10 +132,9 @@ export default async function decorate(block) {
     const slideNavButtons = document.createElement('div');
     slideNavButtons.classList.add('carousel-navigation-buttons');
     slideNavButtons.innerHTML = `
-      <button type="button" class= "slide-prev" aria-label="${placeholders.previousSlide || 'Previous Slide'}"></button>
+      <button type="button" class="slide-prev" aria-label="${placeholders.previousSlide || 'Previous Slide'}"></button>
       <button type="button" class="slide-next" aria-label="${placeholders.nextSlide || 'Next Slide'}"></button>
     `;
-
     container.append(slideNavButtons);
   }
 
@@ -149,5 +157,20 @@ export default async function decorate(block) {
 
   if (!isSingleSlide) {
     bindEvents(block);
+
+    // --- Auto-play logic: always forward loop ---
+    let autoPlay = setInterval(() => {
+      const currentIndex = parseInt(block.dataset.activeSlide || '0', 10);
+      showSlide(block, currentIndex + 1); // wraps to 0 automatically
+    }, 5000);
+
+    // Pause on hover
+    block.addEventListener('mouseenter', () => clearInterval(autoPlay));
+    block.addEventListener('mouseleave', () => {
+      autoPlay = setInterval(() => {
+        const currentIndex = parseInt(block.dataset.activeSlide || '0', 10);
+        showSlide(block, currentIndex + 1);
+      }, 3000);
+    });
   }
 }
