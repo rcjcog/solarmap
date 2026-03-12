@@ -162,7 +162,7 @@ export default async function decorate(block) {
     let autoPlay = setInterval(() => {
       const currentIndex = parseInt(block.dataset.activeSlide || '0', 10);
       showSlide(block, currentIndex + 1); // wraps to 0 automatically
-    }, 5000);
+    }, 3000);
 
     // Pause on hover
     block.addEventListener('mouseenter', () => clearInterval(autoPlay));
