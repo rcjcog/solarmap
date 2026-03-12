@@ -1,8 +1,11 @@
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+       position: relative;
+    background: #0659d4;
+    z-index: 1;
 }
-
+.footer-wrapper {
+    padding: 100px 0 90px;
+}
 footer .footer > div {
   margin: auto;
   max-width: 1200px;
