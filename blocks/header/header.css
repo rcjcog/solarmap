@@ -1,10 +1,102 @@
-/* header and nav layout */
+/* Entire header sticky so both bars stay visible */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* span.icon.icon-facebook {
+    display: flex;
+    height: 24px;
+    width: 24px;
+}
+span.icon.icon-instagram {
+    display: flex;
+    height: 24px;
+    width: 24px;
+}
+span.icon.icon-twitter-x {
+    display: flex;
+    height: 24px;
+    width: 24px;
+} */
+header .navtop .right-info {
+  display: flex;
+  gap: 12px;
+}
+
+header .navtop .right-info a {
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+/* Upper nav (blue bar) */
+header .navtop-wrapper {
+  background-color: #0659d4;
+  color: #fff;
+  font-size: 14px;
+  padding: 6px 24px;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+header .navtop .left-info {
+  display: flex;
+  gap: 16px;
+}
+
+.right-info {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 12px;
+}
+
+.right-info a {
+  text-decoration: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  font-size: 15px;
+}
+
+header .navtop .center-info {
+  flex: 1;
+  text-align: center;
+}
+
+header .navtop .right-info {
+  display: flex;
+  gap: 12px;
+}
+
+header .navtop a {
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (max-width: 899px) {
+  header .navtop {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+/* Main nav wrapper */
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
   z-index: 2;
-  position: fixed;
+  position: relative;
 }
+
+/* Main nav layout */
 header nav {
   box-sizing: border-box;
   display: grid;
@@ -32,25 +124,12 @@ header nav .nav-sections a.active-link {
   font-weight: 600;
 }
 
-
 /* hamburger */
-/* header nav .nav-hamburger {
-  grid-area: hamburger;
-  height: 22px;
-  display: block;
-  visibility: visible;
-  align-items: center;
-} */
-
 header nav a {
   font-size: 16px;
 }
 
 @media (width >=900px) {
-  header .nav-wrapper {
-    position: relative;
-  }
-
   header nav {
     display: flex;
     justify-content: space-between;
@@ -68,13 +147,20 @@ header nav a {
 header nav p {
   margin: 0;
   line-height: 1;
+  font-size: 16px;
 }
 
+.welcome-text {
+  margin-left: 10px;   /* spacing from address */
+  font-style: italic;  /* optional style */
+  color: #fff;         /* white text for blue header */
+  font-size: 0.9rem;   /* slightly smaller */
+}
 header nav a:any-link {
   color: currentcolor;
 }
 
-/* hamburger */
+/* hamburger styles */
 header nav .nav-hamburger {
   grid-area: hamburger;
   height: 22px;
@@ -90,9 +176,6 @@ header nav .nav-hamburger button {
   padding: 0;
   background-color: var(--background-color);
   color: inherit;
-  overflow: initial;
-  text-overflow: initial;
-  white-space: initial;
 }
 
 header nav .nav-hamburger-icon,
@@ -152,9 +235,9 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   header nav .nav-hamburger {
     display: flex;
     visibility: visible;
-    margin-left: 16px; 
+    margin-left: 16px;
     align-items: center;
-     order: 99;
+    order: 99;
   }
 }
 
@@ -204,19 +287,6 @@ header nav .nav-sections ul>li>ul>li {
   font-weight: 400;
 }
 
-header .navtop-wrapper {
-  background-color: #0659d4;
-  color: #fff;
-  font-size: 14px;
-  padding: 6px 24px;
-}
-
-header .navtop {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 @media (width >=900px) {
   header nav .nav-sections {
     display: block;
@@ -244,7 +314,6 @@ header .navtop {
     width: 6px;
     height: 6px;
     border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
     border-width: 2px 2px 0 0;
   }
 
@@ -258,7 +327,7 @@ header .navtop {
     display: flex;
     gap: 32px;
     margin: 0;
-     padding: 0;
+    padding: 0;
     list-style: none;
     justify-content: end;
   }
@@ -289,8 +358,6 @@ header .navtop {
     position: absolute;
     top: -8px;
     left: 16px;
-    width: 0;
-    height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 8px solid var(--light-color);
