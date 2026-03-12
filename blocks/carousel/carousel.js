@@ -89,17 +89,44 @@ function createSlide(row, slideIndex, carouselId) {
   slide.classList.add('carousel-slide');
 
   row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
-    column.classList.add(`carousel-slide-${colIdx === 0 ? 'image' : 'content'}`);
+    if (colIdx === 0) {
+      column.classList.add('carousel-slide-image');
+    } else {
+      column.classList.add('carousel-slide-content');
+
+      // 👉 Add specific classes for text elements
+      column.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {
+        heading.classList.add('carousel-slide-heading');
+      });
+
+      // Assign two separate classes for <p>
+      column.querySelectorAll('p').forEach((para, idx) => {
+        if (idx === 0) {
+          para.classList.add('carousel-slide-text-primary');
+        } else {
+          para.classList.add('carousel-slide-text-secondary');
+        }
+      });
+
+      column.querySelectorAll('a, button').forEach((cta) => {
+        cta.classList.add('carousel-slide-cta');
+      });
+    }
     slide.append(column);
   });
 
   const labeledBy = slide.querySelector('h1, h2, h3, h4, h5, h6');
   if (labeledBy) {
-    slide.setAttribute('aria-labelledby', labeledBy.getAttribute('id'));
+    if (!labeledBy.id) {
+      labeledBy.id = `carousel-${carouselId}-heading-${slideIndex}`;
+    }
+    slide.setAttribute('aria-labelledby', labeledBy.id);
   }
 
   return slide;
 }
+
+
 
 let carouselId = 0;
 export default async function decorate(block) {
