@@ -366,3 +366,7 @@ header .nav-drop:first-of-type p a {
 header .default-content-wrapper ul li p a:hover {
   color: #0659d4;
 }
+header nav .nav-sections ul li:first-child p {
+  color: #0659d4;
+  font-weight: 700;
+}
