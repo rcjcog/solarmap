@@ -1,23 +1,160 @@
-footer {
-       position: relative;
-    background: #0659d4;
-    z-index: 1;
-}
+ /* ============================================================
+   FOOTER — Solarmap AEM EDS
+   ============================================================ */
+
+/* Container */
 .footer-wrapper {
-    padding: 100px 0 90px;
+  background-color: #0659d4;
+  color: #ffffff;
+  padding: 60px 0 0;
+  font-family: var(--body-font-family, 'Roboto', sans-serif);
 }
-footer .footer > div {
-  margin: auto;
+
+.footer > div {
   max-width: 1200px;
-  padding: 40px 24px 24px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-footer .footer p {
-  margin: 0;
+/* ── Inner Grid (4 columns) ───────────────────────────────── */
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+@media (max-width: 1024px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
   }
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* ── Column Titles ────────────────────────────────────────── */
+.footer-col-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 20px;
+  letter-spacing: 0.3px;
+}
+
+/* ── Column 1: Address ────────────────────────────────────── */
+.footer-address-desc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+
+.footer-address-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-address-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.footer-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Columns 2 & 3: Links ─────────────────────────────────── */
+.footer-links-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links-list li a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links-list li a:hover {
+  color: #4fc3f7;
+  padding-left: 6px;
+}
+
+/* ── Column 4: Brand ──────────────────────────────────────── */
+.footer-brand-logo {
+  margin-bottom: 16px;
+}
+
+.footer-brand-img {
+  width: auto;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+  /* Logo is white on dark bg — if needed invert for visibility */
+  filter: brightness(0) invert(1);
+}
+
+.footer-brand-desc {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+
+/* ── Social Icons ─────────────────────────────────────────── */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-social-btn:hover {
+  background-color: #4fc3f7;
+  color: #0d1b3e;
+  transform: translateY(-2px);
+}
+
+/* ── Bottom Bar ───────────────────────────────────────────── */
+.footer-bottom {
+  text-align: center;
+  padding: 20px 24px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
 }
