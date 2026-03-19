@@ -27,14 +27,11 @@ footer .footer ul {
 }
 footer .footer .default-content-wrapper > ul {
   display: flex;
-  justify-content: space-between; /* evenly spread */
-  flex-wrap: wrap; 
+  gap: 2%;
 }
 
 footer .footer .default-content-wrapper > ul > li {
-   flex: 1;                        /* equal width columns */
-  min-width: 220px;               /* prevent collapse */
-  padding: 0 12px;  
+  width: 24%;
 }
 
 footer .footer ul h2 {
